@@ -43,7 +43,7 @@ pipeline {
         	steps{
         	    withAWS(credentials: 'AWS_Creds', region: "${AWS_REGION}") {
                     sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}'
-                    sh "docker push ${ECR_URI}:devopsnxt-demo:latest"    
+                    sh "docker push ${ECR_URI}:latest"    
               }
         	}
         }
