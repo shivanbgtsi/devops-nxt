@@ -1,6 +1,11 @@
 pipeline {
     agent any
-
+	environment {
+        AWS_REGION = 'ap-south-1' 
+        ECR_REPO_NAME = 'devops-nxt-repo'
+        ECR_URI = "381491987051.dkr.ecr.ap-south-1.amazonaws.com/devops-nxt-repo"
+        DOCKER_IMAGE_TAG = 'latest'
+    }
     stages {
         stage('test-pipeline') {
             steps {
@@ -24,6 +29,14 @@ pipeline {
         		sh 'mvn clean install'
         		script{
         			docker.build('devopsnxt-demo:latest', '-f Dockerfile .')
+				}
+        	}
+        }
+        stage('Push docker image to Amazon ECR'){
+        	steps{
+        			withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+					 sh "docker push ${ECR_URI}:${DOCKER_IMAGE_TAG}"
+					echo "Successfully created Amazon ECR"
 				}
         	}
         }
