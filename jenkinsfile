@@ -20,7 +20,9 @@ pipeline {
         stage('Build docker image'){
         	steps{
         		echo "Building docker image"
-        		docker.build('devopsnxt-demo:latest', '-f /var/lib/jenkins/workspace/devops-poc-1/Dockerfile .')
+        		script{
+        			docker.build('devopsnxt-demo:latest', '-f /var/lib/jenkins/workspace/devops-poc-1/Dockerfile .')
+				}
         	}
         }
      }  
