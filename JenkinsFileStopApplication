@@ -19,10 +19,11 @@ pipeline {
                     sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}'
               }
               sh "docker ps"
+              
               sh "docker stop ${IMAGE_NAME}"
               sh "docker rm ${IMAGE_NAME}"
-              echo "this is to check if image is still running"
-              sh "docker ps"
+              echo "This to check stoped container"
+              sh "docker ps -f "status=exited""
         	}
        }
      }  
