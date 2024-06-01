@@ -28,7 +28,7 @@ pipeline {
         		sh 'docker --version'
         		sh 'mvn clean install'
         		script{
-        			dockerImage = docker.build("${IMAGE_NAME}:${DOCKER_IMAGE_TAG}', '-f Dockerfile .')
+        			dockerImage = docker.build("${IMAGE_NAME}:${DOCKER_IMAGE_TAG}", "-f Dockerfile .")
 				}
         	}
         }
