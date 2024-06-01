@@ -52,8 +52,8 @@ pipeline {
         	    withAWS(credentials: 'AWS_Creds', region: "${AWS_REGION}") {
                     sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}'
               }
-              sh "docker pull ECR_URI:$IMAGE_TAG"
-              sh "docker run -d -p 9091:9091 --name $IMAGE_NAME ECR_URI:$DOCKER_IMAGE_TAG"
+              sh "docker pull ECR_URI:$DOCKER_IMAGE_TAG"
+              sh "docker run -d -p 9091:9091 --name $IMAGE_NAME ECR_URI:$IMAGE_NAME"
         	}
        }
      }  
