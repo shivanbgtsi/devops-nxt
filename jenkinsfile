@@ -5,12 +5,12 @@ pipeline {
         ECR_REPO_NAME = 'devops-nxt-repo'
         ECR_URI = "381491987051.dkr.ecr.ap-south-1.amazonaws.com/devops-nxt-repo"
         DOCKER_IMAGE_TAG = 'latest'
+        IMAGE_NAME = 'devopsnxt-demo'
     }
     stages {
         stage('test-pipeline') {
             steps {
-            	sh 'pwd'
-                echo "test pipeline"
+                echo "Pipeline triggered success"
             }
         }
         stage('create Amazon ECR repository'){
@@ -28,14 +28,21 @@ pipeline {
         		sh 'docker --version'
         		sh 'mvn clean install'
         		script{
-        			docker.build('devopsnxt-demo:latest', '-f Dockerfile .')
+        			dockerImage = docker.build("${IMAGE_NAME}:${DOCKER_IMAGE_TAG}', '-f Dockerfile .')
 				}
         	}
         }
+        stage('Tag Docker Image') {
+            steps {
+                script {
+                    sh "docker tag ${IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${ECR_URI}:${DOCKER_IMAGE_TAG}"
+                }
+            }
+        }
         stage('Push docker image to Amazon ECR'){
         	steps{
-        			withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-					 sh "docker push ${ECR_URI}:devopsnxt-demo:latest"
+        		withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+					sh "docker push ${ECR_URI}:${DOCKER_IMAGE_TAG}"
 					echo "Successfully pushed image to Amazon ECR"
 				}
         	}
