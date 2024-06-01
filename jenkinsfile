@@ -44,9 +44,24 @@ pipeline {
         	    withAWS(credentials: 'AWS_Creds', region: "${AWS_REGION}") {
                     sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}'
                     sh "docker push ${ECR_URI}:devopsnxt-demo:latest"    
-                    sh  "docker run -d 9091:9091 devopsnxt-demo:latest"
               }
         	}
+        }
+        stage('Pull docker image to Amazon ECR and run'){
+        	steps{
+        	    withAWS(credentials: 'AWS_Creds', region: "${AWS_REGION}") {
+                    sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}'
+              }
+              sh "docker pull ECR_URI:$IMAGE_TAG"
+        	}
+        }
+         stage('Run Docker Container') {
+            steps {
+                script {
+                    // Run the Docker container
+                    sh "docker run -d -p 9091:90091--name $IMAGE_NAME ECR_URI:$IMAGE_TAG"
+                }
+            }
         }
      }  
 }
