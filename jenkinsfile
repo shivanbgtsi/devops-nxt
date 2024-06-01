@@ -12,7 +12,7 @@ pipeline {
 			steps{
 				echo "Inside creation repo"
 				withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-					sh 'aws ecr create-repository --repository-name devops-nxt-repo'
+					sh 'aws ecr describe-repositories --repository-names devops-nxt-repo || aws ecr create-repository --repository-name devops-nxt-repo'
 					echo "Successfully created Amazon ECR"
 				}
 			}        
