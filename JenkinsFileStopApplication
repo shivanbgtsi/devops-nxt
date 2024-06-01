@@ -20,6 +20,7 @@ pipeline {
               }
               sh "docker ps"
               sh "docker stop ${IMAGE_NAME}"
+              sh "docker rm ${IMAGE_NAME}"
         	}
        }
      }  
