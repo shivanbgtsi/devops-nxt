@@ -39,12 +39,13 @@ pipeline {
                 }
             }
         }
-        stage('Push docker image to Amazon ECR'){
+        stage('Push docker image to Amazon ECR and run'){
         	steps{
-        		withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-					sh "docker push ${ECR_URI}:${DOCKER_IMAGE_TAG}"
-					echo "Successfully pushed image to Amazon ECR"
-				}
+        	    withAWS(credentials: 'AWS_Creds', region: "${AWS_REGION}") {
+                    sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}'
+                    sh "docker push ${ECR_URI}:devopsnxt-demo:latest"    
+                    sh docker run -d 9091:9091 devopsnxt-demo:latest
+              }
         	}
         }
      }  
