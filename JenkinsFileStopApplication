@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+	environment {
+        AWS_REGION = 'ap-south-1' 
+        ECR_REPO_NAME = 'devops-nxt-repo'
+        ECR_URI = "381491987051.dkr.ecr.ap-south-1.amazonaws.com/devops-nxt-repo"
+        DOCKER_IMAGE_TAG = 'latest'
+        IMAGE_NAME = 'devopsnxt-demo'
+    }
+    stages {
+        stage('test-pipeline') {
+            steps {
+                echo "Pipeline triggered success"
+            }
+        }
+        stage('Stop docker image from Amazon ECR'){
+        	steps{
+        	    withAWS(credentials: 'AWS_Creds', region: "${AWS_REGION}") {
+                    sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}'
+              }
+              sh "docker ps"
+              sh "docker stop ${IMAGE_NAME}"
+        	}
+       }
+     }  
+}
