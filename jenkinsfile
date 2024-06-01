@@ -55,7 +55,6 @@ pipeline {
               sh "docker pull ECR_URI:$IMAGE_TAG"
               sh "docker run -d -p 9091:9091 --name $IMAGE_NAME ECR_URI:$DOCKER_IMAGE_TAG"
         	}
-        }
-      }
+       }
      }  
 }
