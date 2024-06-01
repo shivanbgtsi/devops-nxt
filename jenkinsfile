@@ -35,8 +35,8 @@ pipeline {
         stage('Push docker image to Amazon ECR'){
         	steps{
         			withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-					 sh "docker push ${ECR_URI}:${DOCKER_IMAGE_TAG}"
-					echo "Successfully created Amazon ECR"
+					 sh "docker push ${ECR_URI}:devopsnxt-demo:latest"
+					echo "Successfully pushed image to Amazon ECR"
 				}
         	}
         }
