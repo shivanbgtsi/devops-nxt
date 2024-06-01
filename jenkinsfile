@@ -23,7 +23,7 @@ pipeline {
         		sh 'docker --version'
         		sh 'mvn clean install'
         		script{
-        			docker.build('devopsnxt-demo:latest', '-f /var/lib/jenkins/workspace/devops-poc-1/Dockerfile .')
+        			docker.build('devopsnxt-demo:latest', '-f Dockerfile .')
 				}
         	}
         }
