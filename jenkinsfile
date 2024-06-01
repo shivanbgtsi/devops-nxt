@@ -7,5 +7,12 @@ pipeline {
                 echo "test pipeline"
             }
         }
+        stage('create Amazon ECR repository'){
+			steps{
+				echo "Inside creation repo"
+				sh 'aws ecr create-repository --repository-name devops-nxt-repo'
+				echo "Successfully created Amazon ECR"
+			}        
+        }
      }  
 }
