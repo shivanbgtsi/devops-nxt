@@ -13,6 +13,11 @@ pipeline {
                 }
             }
         }
+        stage("Verify"){
+            steps {
+                echo "test"
+            }
+        }
     }
 }
     
