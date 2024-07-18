@@ -9,7 +9,7 @@ pipeline {
         stage("verify-build-prerequistes") {
             steps {
                 dir(".") {
-                    sh 'shellspec --env-from shell/env/dev.sh --format tap'
+                    sh 'shellspec --env-from spec/env/dev.sh --format tap'
                 }
             }
         }
