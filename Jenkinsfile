@@ -8,10 +8,8 @@ pipeline {
         }
         stage("verify-build-prerequistes") {
             steps {
-                dir(".") {
                     echo pwd
                     sh 'shellspec --env-from spec/env/dev.sh --format tap'
-                }
             }
         }
         stage("Verify"){
