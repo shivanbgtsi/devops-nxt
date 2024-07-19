@@ -10,7 +10,7 @@ pipeline {
             steps {
                 dir(".") {
                     echo pwd
-                    ls
+    				echo ls
                     sh 'shellspec --env-from spec/env/dev.sh --format tap'
                 }
             }
