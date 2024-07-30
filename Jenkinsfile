@@ -13,6 +13,10 @@ pipeline {
                    echo  pwd
                    sh 'shellspec --env-from spec/env/dev.sh --format tap'
                  }
+                    sh '''
+                    source spec/env/dev.sh
+                    shellspec --format tap
+                	'''
             }
         }
         stage("Verify"){
