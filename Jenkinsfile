@@ -8,10 +8,11 @@ pipeline {
         }
         stage("verify-build-prerequistes") {
             steps {
+            	echo pwd
             	dir("/var/lib/jenkins/workspace/test"){
-                   echo "PWD " pwd
+                   echo  pwd
                    sh 'shellspec --env-from spec/env/dev.sh --format tap'
-                  }
+                 }
             }
         }
         stage("Verify"){
