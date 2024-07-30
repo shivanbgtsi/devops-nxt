@@ -9,7 +9,9 @@ pipeline {
         stage("verify-build-prerequistes") {
             steps {
                     echo pwd
+                    echo spec/env/dev.sh
                     sh 'shellspec --env-from spec/env/dev.sh --format tap'
+                    
             }
         }
         stage("Verify"){
