@@ -8,13 +8,13 @@
 Describe "Demo prerequisites"
 
   Describe "in AWS parameter store"
-      It "Semarchy value exists - $RDS"
+      It "RDS password exists - $RDS"
         When call aws_ssm_by_path "$RDS"
         The output should include "pass"
     End
-      It "Artifactory password exists - $RDS"
+      It "RDS user name exists - $RDS"
         When call aws_ssm_by_path "$RDS"
-        The output should include "pass"
+        The output should include "username"
     End
   End
   Describe "in AWS parameter store-temp"
