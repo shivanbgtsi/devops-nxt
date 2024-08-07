@@ -14,16 +14,9 @@ pipeline {
                    sh 'shellspec --env-from spec/env/dev.sh --format tap'
                  }
                     sh '''
-                    source spec/env/dev.sh
-                    shellspec --format tap
+                    shellspec --require spec_helper --output tap --format documentation spec/packer.sh
                 	'''
             }
-        }
-        stage("testnig"){
-              steps {
-                   shellspec --require spec/spec_helper --output tap --format documentation spec/packer.sh
-                   // sh  'shellspec --require spec/spec_helper --env-from spec/env/dev.sh --output tap --format documentation spec/packer.sh'
-              }
         }
         stage("Verify"){
             steps {
