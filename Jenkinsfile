@@ -20,7 +20,10 @@ pipeline {
             }
         }
         stage("testnig"){
-           sh  'shellspec --require spec/spec_helper --env-from spec/env/dev.sh --output tap --format documentation spec/packer.sh'
+              steps {
+                   shellspec --require spec/spec_helper --output tap --format documentation spec/packer.sh
+                   // sh  'shellspec --require spec/spec_helper --env-from spec/env/dev.sh --output tap --format documentation spec/packer.sh'
+              }
         }
         stage("Verify"){
             steps {
