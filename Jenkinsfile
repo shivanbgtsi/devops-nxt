@@ -19,6 +19,9 @@ pipeline {
                 	'''
             }
         }
+        stage("testnig"){
+            shellspec --require spec_helper --output tap --format documentation spec/packer.sh
+        }
         stage("Verify"){
             steps {
                 echo "test"
