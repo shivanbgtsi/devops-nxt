@@ -18,3 +18,6 @@ jobs:
 
       - name: Check dir
         run: pwd 
+      
+      - name: Run ShellCheck
+        run: shellcheck spec/packer_spec.sh
