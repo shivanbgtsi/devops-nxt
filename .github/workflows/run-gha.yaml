@@ -12,8 +12,9 @@ jobs:
 
       - name: Change directory and run ShellSpec
         run: |
-          cd /var/lib/jenkins/workspace/test
           echo $(pwd)
+          # cd /var/lib/jenkins/workspace/test
+         
           shellspec --env-from spec/env/dev.sh --format tap
         shell: /usr/bin/bash -e {0}
 
