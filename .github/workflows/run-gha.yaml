@@ -10,24 +10,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install ShellCheck
-        run: sudo apt-get install -y shellcheck
-
-      - name: Check shellcheck version 
-        run: shellcheck -V
-
-      - name: Check dir
-        run: pwd 
-      
-      - name: Run ShellCheck
-        run: shellcheck spec/packer_spec.sh
-
-      - name: Install ShellSpec
-        shell: /usr/bin/bash -e {0}
+      - name: Change directory and run ShellSpec
         run: |
-          curl -fsSL https://git.io/shellspec | sh
-          shellspec --init
-
-      - name: Run ShellSpec tests
+          cd /var/lib/jenkins/workspace/test
+          echo $(pwd)
+          shellspec --env-from spec/env/dev.sh --format tap
         shell: /usr/bin/bash -e {0}
-        run: ./shellspec -f -q
+
+      # - name: Install ShellCheck
+      #   run: sudo apt-get install -y shellcheck
+
+      # - name: Check shellcheck version 
+      #   run: shellcheck -V
+
+      # - name: Check dir
+      #   run: pwd 
+      
+      # - name: Run ShellCheck
+      #   run: shellcheck spec/packer_spec.sh
+
+      # - name: Install ShellSpec
+      #   shell: /usr/bin/bash -e {0}
+      #   run: |
+      #     curl -fsSL https://git.io/shellspec | sh
+      #     shellspec --init
+
+      # - name: Run ShellSpec tests
+      #   shell: /usr/bin/bash -e {0}
+      #   run: ./shellspec -f -q
