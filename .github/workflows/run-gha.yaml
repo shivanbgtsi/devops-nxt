@@ -23,9 +23,11 @@ jobs:
         run: shellcheck spec/packer_spec.sh
 
       - name: Install ShellSpec
+        shell: /usr/bin/bash -e {0}
         run: |
           curl -fsSL https://git.io/shellspec | sh
           shellspec --init
 
       - name: Run ShellSpec tests
-        run: ./shellspec
+        shell: /usr/bin/bash -e {0}
+        run: ./shellspec -f -q
