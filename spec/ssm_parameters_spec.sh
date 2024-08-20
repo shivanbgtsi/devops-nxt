@@ -4,7 +4,7 @@ Describe 'AWS SSM Parameter Verification'
   BeforeAll 'fetch_parameters'
 
   It 'should have the expected SSM parameter values'
-    The "$PARAMETER_VALUE" should equal "expected_value"
+    The "$PARAMETER_VALUE" should equal "/dev/rds"
   End
 
 End
