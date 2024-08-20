@@ -1,0 +1,33 @@
+name: Shellspec Test for AWS SSM Parameters
+
+on:
+  push:
+    branches:
+      - shell-check-gha
+  pull_request:
+    branches:
+      - shell-check-gha
+
+jobs:
+  shellspec:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
+
+    - name: Install Shellspec
+      run: |
+        curl -sL https://github.com/shellspec/shellspec/releases/download/0.30.3/shellspec-0.30.3-linux-amd64.tar.gz | tar xz
+        sudo mv shellspec /usr/local/bin/
+
+    - name: Run Shellspec tests
+      run: |
+        shellspec spec/ssm_parameters_spec.sh
