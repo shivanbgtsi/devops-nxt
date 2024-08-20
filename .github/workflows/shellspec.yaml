@@ -26,6 +26,8 @@ jobs:
     - name: Install Shellspec
       run: |
         curl -sL https://github.com/shellspec/shellspec/releases/download/0.28.1/shellspec-dist.tar.gz | tar xz
+        pwd 
+        ls
         sudo mv shellspec /usr/local/bin/
 
     - name: Run Shellspec tests
