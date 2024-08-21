@@ -8,7 +8,7 @@
 Describe "Demo prerequisites"
 
   Describe "in AWS parameter store"
-      It "RDS password exists - /dev/rds"
+      It "RDS password exists - $RDS"
         When call aws_ssm_by_path "/dev/rds"
         The output should include "pass"
     End
