@@ -51,4 +51,4 @@ jobs:
 
     - name: Run Shellspec tests
       run: |
-        shellspec spec/ssm_parameters_spec.sh
+        shellspec spec/test_spec.sh
