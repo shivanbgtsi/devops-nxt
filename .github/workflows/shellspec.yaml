@@ -30,24 +30,11 @@ jobs:
         sudo ln -s /opt/shellspec/shellspec /usr/local/bin/shellspec
         shellspec -v
 
-    # - name: Install Shellspec
-    #   run: |
-    #     # Download Shellspec
-    #     curl -sL https://github.com/shellspec/shellspec/releases/download/0.28.1/shellspec-dist.tar.gz -o shellspec.tar.gz
-    #     # Verify the file format
-    #     file shellspec.tar.gz
-    #     # Extract Shellspec
-    #     tar xzf shellspec.tar.gz
-    #     # Move Shellspec to /usr/local/bin
-    #     sudo mv shellspec /usr/local/bin/
-    #     # Verify installation
-    #     shellspec --version
-    #     # curl -sL https://github.com/shellspec/shellspec/releases/download/0.28.1/shellspec-dist.tar.gz | tar xz
-    #     # sudo mv shellspec /usr/local/bin/
-    #     # ls -l /usr/local/bin/shellspec
-    #     # file /usr/local/bin/shellspec
-    #     # chmod +x /usr/local/bin/shellspec
-    #     # shellspec --version 
+    - name: Export variable 
+      run: | 
+         source spec/env/dev.sh
+         echo "AWS_REGION=ap-south-1" >> $GITHUB_ENV
+         echo "RDS=/dev/rds" >> $GITHUB_ENV
 
     - name: Run Shellspec tests
       run: |
