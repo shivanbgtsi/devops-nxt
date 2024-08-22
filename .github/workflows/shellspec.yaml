@@ -33,8 +33,6 @@ jobs:
     - name: Export variable 
       run: | 
          source spec/env/dev.sh
-         echo "AWS_REGION=ap-south-1" >> $GITHUB_ENV
-         echo "RDS=/dev/rds" >> $GITHUB_ENV
 
     - name: Run Shellspec tests
       run: |
