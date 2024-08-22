@@ -30,12 +30,12 @@ jobs:
         sudo ln -s /opt/shellspec/shellspec /usr/local/bin/shellspec
         shellspec -v
 
-    - name: Export variable 
-      run: | 
-         source spec/env/dev.sh
-         echo "AWS_REGION=ap-south-1" >> $GITHUB_ENV
-         echo "RDS=/dev/rds" >> $GITHUB_ENV
+    # - name: Export variable 
+    #   run: | 
+    #      source spec/env/dev.sh
+    #      echo "AWS_REGION=ap-south-1" >> $GITHUB_ENV
+    #      echo "RDS=/dev/rds" >> $GITHUB_ENV
 
     - name: Run Shellspec tests
       run: |
-        shellspec spec/test_spec.sh
+        shellspec --env-from spec/env/dev.sh spec/test_spec.sh
