@@ -23,7 +23,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
-    - name: Install shellspec with git
+    - name: Install shellspec with git- yest
       run: | 
         sudo mkdir -p /opt/shellspec
         sudo git clone https://github.com/shellspec/shellspec.git /opt/shellspec
