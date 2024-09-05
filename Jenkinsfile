@@ -13,10 +13,9 @@ pipeline {
                    echo  pwd
                    sh 'shellspec --env-from spec/env/dev.sh --format tap'
                  }
-                    sh '''
-                    source spec/env/dev.sh
-                    shellspec --format tap
-                	'''
+                 //    sh '''
+                 //    shellspec --require spec_helper --output tap --format documentation spec/packer.sh
+                	// '''
             }
         }
         stage("Verify"){
