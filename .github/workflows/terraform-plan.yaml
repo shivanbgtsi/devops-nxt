@@ -1,4 +1,4 @@
-name: TF Embiology domain
+name: TF test
 
 on:
   pull_request:
@@ -25,7 +25,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: role
-        run: echo ${{ env.test }}
+        run: |
+          echo pwd 
       - name: tf_plan
         uses: ./.github/actions/tfplan
         with:
