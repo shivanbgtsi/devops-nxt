@@ -18,6 +18,7 @@ runs:
     - name: setup-node
       run: |
         echo  ${{ inputs.test }}
+      shell: bash
 
 
 
