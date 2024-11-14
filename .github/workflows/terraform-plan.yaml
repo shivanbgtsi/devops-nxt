@@ -27,6 +27,7 @@ jobs:
       - name: role
         run: |
           pwd
+          ls ./.github/actions/tfplan
       - name: tf_plan
         uses: ./.github/actions/tfplan
         with:
