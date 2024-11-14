@@ -17,7 +17,7 @@ runs:
         node-version: "20"
     - name: setup-node
       run: |
-        echo  ${{ inputs.test }}
+        echo "The input value for 'test' is: ${{ inputs.test }}"
       shell: bash
 
 
