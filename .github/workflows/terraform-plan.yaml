@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v4
       - name: role
         run: |
-          echo pwd 
+          pwd
       - name: tf_plan
         uses: ./.github/actions/tfplan
         with:
