@@ -3,7 +3,12 @@ description: 'composite action'
 
 inputs:
   test:
-    description: "Version of Terraform to use"
+    description: "test"
+    type: string
+    default: "temp"
+    required: true
+  environment:
+    description: "environment"
     type: string
     default: "temp"
     required: true
@@ -15,9 +20,13 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: "20"
-    - name: setup-node
+    - name: echo env 
       run: |
         echo "The input value for 'test' is: ${{ inputs.test }}"
+      shell: bash
+    - name: echo var
+      run: |
+        echo "The input value for 'test' is: ${{ inputs.environment }}"
       shell: bash
 
 
