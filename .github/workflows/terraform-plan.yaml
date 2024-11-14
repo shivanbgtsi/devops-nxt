@@ -32,5 +32,6 @@ jobs:
         uses: ./.github/actions/tfplan
         with:
           test: ${{ env.test }}
+          environment: ${{matrix.myenvironment}}
 
           
