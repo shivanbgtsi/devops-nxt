@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: role
-        run: echo ${{ vars.test }}
+        run: echo ${{ env.test }}
       - name: tf_plan
         uses: ./.github/actions/tfplan
         with:
