@@ -31,7 +31,7 @@ jobs:
       - name: tf_plan
         uses: ./.github/actions/tfplan
         with:
-          test: ${{ env.test }}
+          test: ${{ env.TEST }}
           environment: ${{matrix.myenvironment}}
 
           
