@@ -19,8 +19,7 @@ jobs:
     strategy:
       matrix:
         myenvironment: ["nonprod","production"]
-    runs-on:
-      group: elsevier-standard-runners
+    runs-on: ubuntu-latest
     environment: ${{ matrix.myenvironment }}
     steps:
       - name: Checkout
