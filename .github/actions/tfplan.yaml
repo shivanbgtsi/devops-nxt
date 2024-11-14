@@ -1,0 +1,90 @@
+name: 'tfplan'
+description: 'composite action'
+
+inputs:
+  test:
+    description: "Version of Terraform to use"
+    type: string
+    default: "temp"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: setup-node
+      run: |
+        echo  ${{ inputs.test }}
+
+
+
+# inputs:
+#   terraform-version:
+#     description: "Version of Terraform to use"
+#     type: string
+#     default: ">= 1.9.2"
+#     required: false
+#   project-path:
+#     description: "(sub)Directory to run check on"
+#     type: string
+#     required: true
+#   tfvarsfile:
+#     description: "tfvars file"
+#     type: string
+#     required: true
+#   role-to-assume:
+#     description: "deployment role arn"
+#     type: string
+#     required: true
+#   k8clustername:
+#     description: "name of kubernetes cluster"
+#     type: string
+#     required: false
+#   backendconfigfile:
+#     description: "name of the backend configuration file"
+#     type: string
+#     required: true
+#   environment:
+#     description: "environment"
+#     type: string
+#     required: true
+
+# env:
+#   AWS_REGION: "us-east-2"
+
+# runs:
+#   using: "composite"
+#   steps:
+#     - name: setup-node
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: "20"
+#     - name: setup-terraform
+#       uses: hashicorp/setup-terraform@v3
+#       with:
+#         terraform_version: ${{ inputs.terraform-version }}
+#         # terraform_wrapper: false
+#     - name: Set up AWS CLI
+#       uses: aws-actions/configure-aws-credentials@v2
+#       with:
+#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#         aws-region: ap-south-1
+#     - name: terraform init
+#       working-directory: ${{ inputs.project-path }}
+#       run: terraform init -upgrade -input=true -backend=true -backend-config ${{ inputs.backendconfigfile }}
+#       shell: bash
+#     - name: terraform validate
+#       working-directory: ${{ inputs.project-path }}
+#       run: terraform validate
+#       shell: bash
+#     - name: terraform plan
+#       working-directory: ${{ inputs.project-path }}
+#       run: terraform plan -var-file=${{ inputs.tfvarsfile }} -input=false -out=plan.tfplan
+#       shell: bash
+#     - name: upload tfplan as artifact
+#       continue-on-error: true
+#       uses: actions/upload-artifact@v4
+#       with:
+#         name: tfplan-${{inputs.environment}}-${{ job.container.id }}
+#         path: ${{ inputs.project-path }}/plan.tfplan # or path/to/artifact
+#         retention-days: 7
